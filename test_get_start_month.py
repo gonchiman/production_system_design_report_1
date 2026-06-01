@@ -3,4 +3,4 @@ from constants import GameTitle
 
 
 for game_title in GameTitle:
-    print(f"{game_title.value} {get_start_month(game_title.value)}")
+    print(f"{game_title.value}: {get_start_month(game_title.value)}")
