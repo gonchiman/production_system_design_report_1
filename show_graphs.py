@@ -22,20 +22,8 @@ class ShowGraphs:
         plt.figure(figsize=(12, 6))
         plt.plot(x, values, marker="o")
 
-        # 表示したい月だけ指定
-        display_months = [
-            "June 2023",
-            "January 2024",
-            "June 2024",
-            "January 2025",
-            "June 2025",
-            "January 2026",
-            "May 2026",
-        ]
-
         tick_positions = [
-            i for i, month in enumerate(months)
-            if month in display_months
+            i for i, month in enumerate(months) if month.split()[0] == "January"
         ]
 
         tick_labels = [
@@ -45,7 +33,7 @@ class ShowGraphs:
         plt.xticks(
             ticks=tick_positions,
             labels=tick_labels,
-            rotation=45
+            rotation=90
         )
 
         plt.xlabel("Month")
