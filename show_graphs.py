@@ -22,17 +22,9 @@ class ShowGraphs:
         plt.figure(figsize=(12, 6))
         plt.plot(x, values, marker="o")
 
-        tick_positions = [
-            i for i, month in enumerate(months) if month.split()[0] == "January"
-        ]
-
-        tick_labels = [
-            months[i] for i in tick_positions
-        ]
-
         plt.xticks(
-            ticks=tick_positions,
-            labels=tick_labels,
+            ticks=x,
+            labels=months,
             rotation=90
         )
 
