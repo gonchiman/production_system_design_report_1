@@ -6,7 +6,7 @@ class Period:
         self.set_end(end_year, end_month)
 
     def set_start(self, start_year, start_month):
-        self.start = f"{str(start_year)} {start_month}"
+        self.start = f"{start_month} {str(start_year)}"
 
     def set_end(self, end_year, end_month):
-        self.end = f"{str(end_year)} {end_month}"
+        self.end = f"{end_month} {str(end_year)}"
