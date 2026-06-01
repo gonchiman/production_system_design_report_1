@@ -15,6 +15,20 @@ class SteamChartsColumns:
     GAIN_PERCENT = "% Gain"
     PEAK_PLAYERS = "Peak Players"
 
+class Month:
+    JANUALY = "January"
+    FEBRUARY = "February"
+    MARCH = "March"
+    APRIL = "April"
+    MAY = "May"
+    JUNE = "June"
+    JULY = "July"
+    AUGUST = "August"
+    SEPTEMBER = "September"
+    OCTOBER = "October"
+    NOVEMBER = "November"
+    DECEMBER = "December"
+
 APP_IDS = {
     "Street Fighter 6": 1364780,
     "TEKKEN 8": 1778820,
