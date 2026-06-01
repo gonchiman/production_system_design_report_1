@@ -1,4 +1,7 @@
-class GameTitle:
+from enum import Enum
+
+
+class GameTitle(Enum):
     STREET_FIGHTER_6 = "Street Fighter 6"
     TEKKEN_8 = "TEKKEN 8"
     GUILTY_GEAR_STRIVE = "GUILTY GEAR -STRIVE-"
