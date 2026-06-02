@@ -18,7 +18,7 @@ class SteamChartsColumns:
     PEAK_PLAYERS = "Peak Players"
 
 class Month:
-    JANUALY = "January"
+    JANUARY = "January"
     FEBRUARY = "February"
     MARCH = "March"
     APRIL = "April"
