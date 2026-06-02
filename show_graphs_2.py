@@ -1,13 +1,26 @@
-from constants import GameTitle, SteamChartsColumns
+from enum import Enum, auto
+
+from constants import SAVE_DIR, GameTitle, SteamChartsColumns
 from get_df import get_df
 import matplotlib.pyplot as plt
 
 from get_start import get_start
 
+class GraphOperationMode(Enum):
+    SHOW = auto()
+    SAVE = auto()
 
 class ShowGraphs2:
+    GRAPH_OPERATION_MODE = {
+        "show": GraphOperationMode.SHOW,
+        "save": GraphOperationMode.SAVE,
+    }
+
     @staticmethod
-    def show_plot(column: SteamChartsColumns, duration: int = None) -> None:
+    def show_plot(column: SteamChartsColumns, 
+                  duration: int = None, 
+                  mode: GraphOperationMode = GraphOperationMode.SHOW
+        ) -> None:
         plt.figure(figsize=(12, 6))
 
         for game_title in GameTitle:
@@ -59,10 +72,20 @@ class ShowGraphs2:
         plt.legend()
         plt.grid(True)
         plt.tight_layout()
-        plt.show()
+
+        if mode == GraphOperationMode.SHOW:
+            plt.show()
+        elif mode == GraphOperationMode.SAVE:
+            plt.savefig(SAVE_DIR / f"{column}_after_release.png")
+            plt.close()
+        else:
+            raise ValueError("Invalid GraphOperationMode")
 
     @staticmethod
-    def show_cumulative_plot(column: SteamChartsColumns, duration: int = None) -> None:
+    def show_cumulative_plot(column: SteamChartsColumns, 
+                             duration: int = None, 
+                             mode: GraphOperationMode = GraphOperationMode.SHOW
+        ) -> None:
         plt.figure(figsize=(12, 6))
 
         for game_title in GameTitle:
@@ -114,4 +137,11 @@ class ShowGraphs2:
         plt.legend()
         plt.grid(True)
         plt.tight_layout()
-        plt.show()
+
+        if mode == GraphOperationMode.SHOW:
+            plt.show()
+        elif mode == GraphOperationMode.SAVE:
+            plt.savefig(SAVE_DIR / f"{column}_after_release.png")
+            plt.close()
+        else:
+            raise ValueError("Invalid GraphOperationMode")

@@ -1,5 +1,7 @@
 from enum import Enum
 
+from pathlib import Path
+
 
 class GameTitle(Enum):
     STREET_FIGHTER_6 = "Street Fighter 6"
@@ -53,3 +55,6 @@ APP_IDS = {
 }
 
 BASE_URL = "https://steamcharts.com/app/"
+
+BASE_DIR = Path(__file__).resolve().parent
+SAVE_DIR = BASE_DIR / "plots"
