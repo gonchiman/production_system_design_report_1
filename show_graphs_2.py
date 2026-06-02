@@ -2,14 +2,13 @@ from constants import GameTitle, SteamChartsColumns
 from get_df import get_df
 import matplotlib.pyplot as plt
 
-from get_start_month import get_start
-from period import Period
+from get_start import get_start
 
 
 class ShowGraphs2:
     @staticmethod
     def show_plot(column: str, duration: int = None) -> None:
-        plt.figure(figsize=(12, 6))        
+        plt.figure(figsize=(12, 6))
 
         for game_title in GameTitle:
             game_title = game_title.value
@@ -22,36 +21,40 @@ class ShowGraphs2:
             # 古い月 → 新しい月 の順にする
             df = df.iloc[::-1].reset_index(drop=True)
 
-            start = get_start(game_title)
-            start_month, start_year = start.split()
-            period = Period(start_year=start_year, start_month=start_month, duration=duration)
+            # 発売月を取得
+            start_month = get_start(game_title)
 
-            if period is not None:
-                start_index = df.index[df[SteamChartsColumns.MONTH] == period.start][0]
-                end_index = df.index[df[SteamChartsColumns.MONTH] == period.end][0]
+            # 発売月の行番号を探す
+            matched_indexes = df.index[df[SteamChartsColumns.MONTH] == start_month]
 
-                if start_index > end_index:
-                    start_index, end_index = end_index, start_index
+            if len(matched_indexes) == 0:
+                print(f"{game_title}: 発売月 {start_month} が見つかりません")
+                continue
 
-                df = df.iloc[start_index:end_index + 1].reset_index(drop=True)
+            start_index = matched_indexes[0]
 
-            months = df[SteamChartsColumns.MONTH]
+            # 発売月から duration か月分を取得
+            if duration is not None:
+                df = df.iloc[start_index:start_index + duration].reset_index(drop=True)
+            else:
+                df = df.iloc[start_index:].reset_index(drop=True)
+
             values = df[column]
 
+            # x軸は「発売から何か月目」
             x = range(len(df))
-
 
             plt.plot(x, values, marker="o", label=game_title)
 
-        plt.xticks(
-            ticks=x,
-            labels=months,
-            rotation=90
-        )
-
-        plt.xlabel("Month")
+        plt.xlabel("Months Since Release")
         plt.ylabel(column)
-        plt.title(f"{column}")
+        plt.title(f"{column} After Release")
+
+        if duration is not None:
+            plt.xticks(
+                ticks=range(duration),
+                labels=range(1, duration + 1)
+            )
 
         plt.legend()
         plt.grid(True)
