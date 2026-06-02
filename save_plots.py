@@ -7,3 +7,9 @@ ShowGraphs2.show_cumulative_plot(
     duration=23, 
     mode=ShowGraphs2.GRAPH_OPERATION_MODE["save"]
 )
+
+ShowGraphs2.show_cumulative_plot(
+    SteamChartsColumns.PEAK_PLAYERS, 
+    duration=23, 
+    mode=ShowGraphs2.GRAPH_OPERATION_MODE["save"]
+)
